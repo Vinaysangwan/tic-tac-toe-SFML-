@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../common.hpp"
+#include "../fonts_texts/Texts.hpp"
+#include "../game_manager/GameManager.h"
 
 class Home
 {
@@ -8,6 +9,9 @@ private:
     // Private Functions
 
     void initVariables();
+    void initTexts();
+
+    void streamTexts();
 
 public:
     // Public Functions
@@ -22,4 +26,10 @@ public:
 
 private:
     // Private Members
+
+    // Font Address
+    std::string font_address;
+
+    // Texts
+    Texts *home_text;
 };
