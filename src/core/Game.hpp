@@ -1,7 +1,12 @@
 #pragma once
 
-#include "../common.hpp"
 #include <string.h>
+
+// Screens
+#include "../screen/Home.hpp"
+#include "../screen/Play.hpp"
+
+#include "../game_manager/GameManager.h"
 
 class Game
 {
@@ -11,6 +16,7 @@ private:
     // Init Functions
     void initVariables();
     void initWindow();
+    void initScreens();
 
 public:
     // Public Functions
@@ -31,12 +37,14 @@ private:
     // Private Members
 
     // Window Stats
-    unsigned int window_width;  // Width
-    unsigned int window_height; // Height
-    sf::VideoMode vm;           // Video Mode
-    std::string title;          // Title
-    sf::Color window_color;     // Color
+    sf::VideoMode vm;       // Video Mode
+    std::string title;      // Title
+    sf::Color window_color; // Color
 
     // Window
     sf::RenderWindow *window;
+
+    // Screens
+    Home *home_screen; // Home Screen
+    Play *play_screen; // Play Screen
 };

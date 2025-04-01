@@ -7,10 +7,6 @@
 // Initialize all the Variables
 void Game::initVariables()
 {
-    // Set Window Width & Height
-    window_width = 800;
-    window_height = 600;
-
     // Set Window VideoMode
     vm.size.x = window_width;
     vm.size.y = window_height;
@@ -35,18 +31,34 @@ void Game::initWindow()
     window->setFramerateLimit(60);
 }
 
+// Initialize all the Screens
+void Game::initScreens()
+{
+    // Init Home Screen
+    home_screen = new Home();
+
+    // Init Play Screen
+    play_screen = new Play();
+}
+
 //*********************************************************************************************
 //****************************** Constructor & Destructor *************************************
 //*********************************************************************************************
 
+// Constructor
 Game::Game()
 {
     initVariables();
     initWindow();
+    initScreens();
 }
 
+// Destructor
 Game::~Game()
 {
+    // Cleanup
+    delete home_screen;
+    delete play_screen;
     delete window;
 }
 
@@ -82,6 +94,17 @@ void Game::update()
 {
     // Call Poll Evnet Function
     pollEvent();
+
+    switch (game_screen)
+    {
+    case home:
+        home_screen->updateHome();
+        break;
+
+    case play:
+        play_screen->updatePlay();
+        break;
+    }
 }
 
 // Render Function of the Game
@@ -91,6 +114,16 @@ void Game::render()
     window->clear(window_color);
 
     // Draw to render in the window
+    switch (game_screen)
+    {
+    case home:
+        home_screen->renderHome(*window);
+        break;
+
+    case play:
+        play_screen->renderPlay(*window);
+        break;
+    }
 
     window->display();
 }
